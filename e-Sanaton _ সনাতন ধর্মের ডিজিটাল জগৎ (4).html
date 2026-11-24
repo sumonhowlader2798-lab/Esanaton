@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>e-Sanaton | সনাতন ধর্মের ডিজিটাল জগৎ</title>
+<style>
+:root{--bg:#fff8ee;--surf:#fff;--tx:#3a2412;--mu:#7a6551;--ac:#d9600f;--ac2:#b3470a;--bd:#ecd9bf;--hi:#fdeccf;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1409;--surf:#2a1d10;--tx:#f6e8d3;--mu:#bda78c;--ac:#f08a3c;--ac2:#ffa75d;--bd:#4a3520;--hi:#3a2812;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1409;--surf:#2a1d10;--tx:#f6e8d3;--mu:#bda78c;--ac:#f08a3c;--ac2:#ffa75d;--bd:#4a3520;--hi:#3a2812;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.75}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surf);z-index:10}
+header{background:var(--surf);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.w{max-width:960px;margin:0 auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0}
+.logo{font-weight:700;font-size:20px;color:var(--ac)}
+.logo small{display:block;font-size:12px;font-weight:400;color:var(--mu)}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px}
+nav a,.btn{border:1px solid var(--bd);background:var(--surf);color:var(--tx);padding:6px 14px;border-radius:999px;text-decoration:none;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+nav a.on,.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.hero{text-align:center;padding:34px 0 18px}
+.hero .om{font-size:54px;color:var(--ac);line-height:1}
+.hero h1{margin:6px 0;font-size:26px}
+.hero p{color:var(--mu);margin:4px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:14px 16px}
+.card h3{margin:0 0 4px;font-size:17px}
+.card p{margin:0;color:var(--mu);font-size:14px}
+.card.click{cursor:pointer}.card.click:hover{border-color:var(--ac)}
+h2{font-size:21px;margin:22px 0 8px;color:var(--ac2)}
+.mu{color:var(--mu);font-size:14px}
+.sl{font-size:20px;white-space:pre-line;background:var(--hi);border-radius:12px;padding:12px 16px;margin:8px 0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.cal div{min-height:58px;background:var(--surf);border:1px solid var(--bd);border-radius:8px;padding:3px 5px;font-size:12px;overflow:hidden}
+.cal .d{font-weight:700;text-align:center;min-height:0;background:var(--hi)}
+.cal .t{outline:2px solid var(--ac)}
+.ev{display:block;color:var(--ac2);font-size:11px;line-height:1.3}
+.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+input,textarea,select{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--surf);color:var(--tx);margin:4px 0}
+textarea{min-height:140px}
+.read{white-space:pre-wrap;font-size:18px;background:var(--surf);border:1px solid var(--bd);border-radius:12px;padding:16px;overflow-wrap:anywhere}
+a{color:var(--ac2)}
+footer{text-align:center;color:var(--mu);font-size:13px;padding:26px 0 30px}
+.hide{display:none}
+.ek{color:#7a3fc4!important;font-weight:700}
+.ekc{border-left:4px solid #7a3fc4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ek{color:#c9a3ff!important}}
+:root[data-theme="dark"] .ek{color:#c9a3ff!important}
+.bdt{color:#1b7f4c;font-size:11px;font-weight:600}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .bdt{color:#5fd39a}}
+:root[data-theme="dark"] .bdt{color:#5fd39a}
+</style>
+</head>
+<body>
+<header><div class="w">
+<div class="top"><div class="logo">ॐ e-Sanaton<small id="tag"></small></div>
+<div><button class="btn" id="theme" aria-label="Dark mode">🌙</button> <button class="btn" id="lang">English</button></div></div>
+<nav id="nav"></nav></div></header>
+<main class="w" id="app"></main>
+<footer id="foot"></footer>
+<script>
+"use strict";
+var T={
+bn:{tag:"সনাতন ধর্মের ডিজিটাল জগৎ",home:"হোম",cal:"বর্ষপঞ্জি",vid:"ভিডিও",lib:"গ্রন্থাগার",man:"মন্ত্র ও প্রার্থনা",adm:"অ্যাডমিন",
+h1:"ধর্ম, জ্ঞান ও আধ্যাত্মিকতার এক বিশ্বস্ত ঠিকানা",h2:"সনাতন ধর্মের আলো ছড়িয়ে পড়ুক সবার মাঝে",
+cd:"তিথি, পূজা, ব্রত ও উৎসব",vd:"প্রবচন, কীর্তন ও ধর্মীয় আলোচনা",ld:"গীতা, বেদ ও পুরাণ পাঠ",md:"নিত্যপাঠ ও স্তোত্র",
+foot:"জয় শ্রীকৃষ্ণ 🙏 জয় সনাতন ধর্ম · © 2026 e-Sanaton",today:"আজ",noev:"এখনো কোনো অনুষ্ঠান যোগ করা হয়নি।",
+novid:"এখনো কোনো ভিডিও যোগ করা হয়নি।",watch:"ইউটিউবে দেখুন",back:"← ফিরে যান",prev:"আগের অধ্যায়",next:"পরের অধ্যায়",
+by:"রচনা",chap:"অধ্যায়",login:"অ্যাডমিন প্যানেল শুধু সম্পাদকদের জন্য। এটি দেখতে সাইটের মালিক হিসেবে সাইন ইন করুন।",
+addEv:"নতুন তিথি/উৎসব",date:"তারিখ",title:"শিরোনাম",kind:"ধরন",add:"যোগ করুন",del:"মুছুন",addVid:"নতুন ভিডিও",url:"ইউটিউব লিঙ্ক",
+addBk:"নতুন গ্রন্থ",author:"লেখক",txt:"সম্পূর্ণ পাঠ (প্রতিটি অধ্যায় শুরু করুন “## অধ্যায়ের নাম” লাইন দিয়ে)",
+kinds:["তিথি","পূজা","ব্রত","একাদশী","ছুটি"],saving:"সংরক্ষণ হচ্ছে…",err:"সংরক্ষণ করা যায়নি।",
+months:["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"],
+days:["রবি","সোম","মঙ্গল","বুধ","বৃহ","শুক্র","শনি"]},
+en:{tag:"The digital world of Sanatan Dharma",home:"Home",cal:"Calendar",vid:"Videos",lib:"Library",man:"Mantras & Prayers",adm:"Admin",
+h1:"A trusted home for dharma, knowledge and spirituality",h2:"May the light of Sanatan Dharma spread to all",
+cd:"Tithi, puja, vrata and festivals",vd:"Discourses, kirtan and talks",ld:"Read the Gita, Vedas and Puranas",md:"Daily prayers and hymns",
+foot:"Jai Shri Krishna 🙏 Jai Sanatan Dharma · © 2026 e-Sanaton",today:"Today",noev:"No events have been added yet.",
+novid:"No videos have been added yet.",watch:"Watch on YouTube",back:"← Back",prev:"Previous chapter",next:"Next chapter",
+by:"By",chap:"Chapters",login:"The admin panel is for editors only. Sign in as the site owner to see it.",
+addEv:"Add tithi / festival",date:"Date",title:"Title",kind:"Type",add:"Add",del:"Delete",addVid:"Add video",url:"YouTube link",
+addBk:"Add book",author:"Author",txt:"Full text (start each chapter with a “## Chapter title” line)",
+kinds:["Tithi","Puja","Vrata","Ekadashi","Holiday"],saving:"Saving…",err:"Could not save.",
+months:["January","February","March","April","May","June","July","August","September","October","November","December"],
+days:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}};
+var SEED_BOOK={id:"seed-gita",seed:1,title:{bn:"শ্রীমদ্ভগবদ্গীতা (নির্বাচিত শ্লোক)",en:"Bhagavad Gita (selected verses)"},author:{bn:"মহর্ষি বেদব্যাস",en:"Maharshi Vyasa"},
+chapters:[{t:"২.৪৭",b:"কর্মণ্যেবাধিকারস্তে মা ফলেষু কদাচন।\nমা কর্মফলহেতুর্ভূর্মা তে সঙ্গোঽস্ত্বকর্মণি॥\n\nকর্মেই তোমার অধিকার, কর্মফলে কখনও নয়। কর্মফলকে উদ্দেশ্য করো না, আবার অকর্মেও আসক্ত হয়ো না।\n\nYou have a right to action alone, never to its fruits. Do not act for the fruit, nor cling to inaction."},
+{t:"৪.৭",b:"যদা যদা হি ধর্মস্য গ্লানির্ভবতি ভারত।\nঅভ্যুত্থানমধর্মস্য তদাত্মানং সৃজাম্যহম্॥\n\nহে ভারত, যখনই ধর্মের গ্লানি ও অধর্মের অভ্যুত্থান ঘটে, তখনই আমি নিজেকে প্রকাশ করি।\n\nWhenever dharma declines and adharma rises, O Bharata, I manifest myself."},
+{t:"১৮.৬৬",b:"সর্বধর্মান্পরিত্যজ্য মামেকং শরণং ব্রজ।\nঅহং ত্বাং সর্বপাপেভ্যো মোক্ষয়িষ্যামি মা শুচঃ॥\n\nসব ধর্ম ত্যাগ করে একমাত্র আমারই শরণ নাও। আমি তোমাকে সব পাপ থেকে মুক্ত করব, শোক করো না।\n\nAbandoning all duties, take refuge in Me alone. I shall free you from all sins; do not grieve."}]};
+var MANTRAS=[
+{n:{bn:"গায়ত্রী মন্ত্র",en:"Gayatri Mantra"},s:"ওঁ ভূর্ভুবঃ স্বঃ\nতৎসবিতুর্বরেণ্যং ভর্গো দেবস্য ধীমহি।\nধিয়ো যো নঃ প্রচোদয়াৎ॥"},
+{n:{bn:"শান্তি মন্ত্র",en:"Shanti Mantra"},s:"ওঁ সর্বে ভবন্তু সুখিনঃ সর্বে সন্তু নিরাময়াঃ।\nসর্বে ভদ্রাণি পশ্যন্তু মা কশ্চিদ্দুঃখভাগ্ভবেৎ॥\nওঁ শান্তিঃ শান্তিঃ শান্তিঃ॥"},
+{n:{bn:"মহামন্ত্র",en:"Hare Krishna Maha Mantra"},s:"হরে কৃষ্ণ হরে কৃষ্ণ কৃষ্ণ কৃষ্ণ হরে হরে।\nহরে রাম হরে রাম রাম রাম হরে হরে॥"},
+{n:{bn:"গণেশ বন্দনা",en:"Ganesha Vandana"},s:"ওঁ গণেশায় নমঃ।\nবক্রতুণ্ড মহাকায় সূর্যকোটি সমপ্রভ।\nনির্বিঘ্নং কুরু মে দেব সর্বকার্যেষু সর্বদা॥"}];
+var L=localStorage.getItem("l")||"bn";try{L=localStorage.getItem("l")||"bn"}catch(e){L="bn"}
+var S={events:[],videos:[],books:[],canEdit:false,db:null};
+var TABS=["home","cal","vid","lib","man","adm"];
+var calM=new Date();var openBook=null,openCh=0;
+function t(k){return T[L][k]}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function bn(n){return L==="bn"?String(n).replace(/\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]}):String(n)}
+function pick(o){return o&&typeof o==="object"?(o[L]||o.bn||o.en||""):o}
+function tab(){var h=(location.hash||"#home").slice(1);return TABS.indexOf(h)>-1?h:"home"}
+function go(h){location.hash=h}
+function nav(){var tb=tab();document.getElementById("nav").innerHTML=TABS.filter(function(x){return x!=="adm"||S.canEdit}).map(function(x){return '<a href="#'+x+'" class="'+(x===tb?"on":"")+'">'+t(x)+'</a>'}).join("")}
+function home(){var c=[["cal","cd"],["vid","vd"],["lib","ld"],["man","md"]];
+return '<section class="hero"><div class="om">ॐ</div><h1>'+t("h1")+'</h1><p>'+t("h2")+'</p></section><div class="grid">'+c.map(function(x){return '<div class="card click" onclick="go(\''+x[0]+'\')"><h3>'+t(x[0])+'</h3><p>'+t(x[1])+'</p></div>'}).join("")+'</div>'}
+var BM=["বৈশাখ","জ্যৈষ্ঠ","আষাঢ়","শ্রাবণ","ভাদ্র","আশ্বিন","কার্তিক","অগ্রহায়ণ","পৌষ","মাঘ","ফাল্গুন","চৈত্র"];
+var BE=["Boishakh","Joishtho","Asharh","Srabon","Bhadro","Ashwin","Kartik","Agrahayan","Poush","Magh","Falgun","Choitro"];
+var BS=[[3,14],[4,15],[5,15],[6,16],[7,16],[8,16],[9,16],[10,15],[11,15],[0,14],[1,13],[2,15]];
+function bnd(n){return String(n).replace(/\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d]})}
+function bd(y,m,d){var D=new Date(y,m,d),Y=D>=new Date(y,3,14)?y:y-1,k=0,i;
+for(i=0;i<12;i++){var s=new Date(BS[i][0]<3?Y+1:Y,BS[i][0],BS[i][1]);if(s<=D)k=i}
+var st=new Date(BS[k][0]<3?Y+1:Y,BS[k][0],BS[k][1]);return{k:k,d:Math.round((D-st)/864e5)+1,y:Y-593}}
+function cal(){var y=calM.getFullYear(),m=calM.getMonth(),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),now=new Date();
+var f1=bd(y,m,1),f2=bd(y,m,n),nm=function(i){return BM[i]+' ('+BE[i]+')'};
+var h='<div class="row"><div><h2 style="margin-bottom:0">'+T.bn.months[m]+' · '+T.en.months[m]+' '+bn(y)+'</h2><div class="mu">'+(f1.k===f2.k?nm(f1.k):nm(f1.k)+' / '+nm(f2.k))+' '+bnd(f2.y)+'</div></div><div><button class="btn" onclick="mv(-1)">‹</button> <button class="btn" onclick="mv(1)">›</button></div></div><div class="cal">';
+h+=t("days").map(function(d){return '<div class="d">'+d+'</div>'}).join("");
+for(var i=0;i<first;i++)h+='<div style="visibility:hidden"></div>';
+for(var d=1;d<=n;d++){var k=y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");
+var evs=S.events.filter(function(e){return e.date===k});
+var td=now.getFullYear()===y&&now.getMonth()===m&&now.getDate()===d;
+var b=bd(y,m,d);h+='<div class="'+(td?"t":"")+'"><b>'+bn(d)+'</b><small class="bdt"> '+bnd(b.d)+(b.d===1?' '+BM[b.k]:'')+'</small>'+evs.map(function(e){return '<span class="ev'+(e.kind==="একাদশী"?" ek":"")+'">'+esc(e.title)+'</span>'}).join("")+'</div>'}
+h+='</div>';
+var up=S.events.filter(function(e){return e.date.slice(0,7)===y+"-"+String(m+1).padStart(2,"0")}).sort(function(a,b){return a.date<b.date?-1:1});
+h+=up.length?'<div class="grid">'+up.map(function(e){return '<div class="card"><h3>'+esc(e.title)+'</h3><p>'+bn(e.date.slice(8))+' '+t("months")[m]+' · '+esc(e.kind||"")+'</p></div>'}).join("")+'</div>':'<p class="mu">'+t("noev")+'</p>';
+var tk=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+var ekl=S.events.filter(function(e){return e.kind==="একাদশী"&&e.date>=tk}).sort(function(a,b){return a.date<b.date?-1:1});
+h+='<h2 class="ek">'+(L==="bn"?"একাদশী তালিকা":"Ekadashi list")+'</h2>'+(ekl.length?'<div class="grid">'+ekl.map(function(e){var p=e.date.split("-"),b2=bd(+p[0],+p[1]-1,+p[2]);return '<div class="card ekc"><h3>'+esc(e.title)+'</h3><p>'+bnd(+p[2])+' '+T.bn.months[+p[1]-1]+' '+bnd(p[0])+' ('+p[2]+' '+T.en.months[+p[1]-1]+' '+p[0]+') · <span class="bdt">'+bnd(b2.d)+' '+BM[b2.k]+'</span></p></div>'}).join("")+'</div>':'<p class="mu">'+t("noev")+'</p>');
+h+='<p class="mu">'+(L==="bn"?"তিথি ও পূজার তারিখ পঞ্জিকা অনুযায়ী; স্থানভেদে এক দিন আগে-পরে হতে পারে। বাংলা তারিখ বাংলাদেশের সংশোধিত বাংলা সনের হিসাবে।":"Tithi and puja dates follow the panchang and may differ by a day by location. Bangla dates use the Bangladesh revised calendar.")+'</p>';
+return h}
+function mv(d){calM=new Date(calM.getFullYear(),calM.getMonth()+d,1);render()}
+var VFB=[{title:"প্রাণ পুরুষ শ্রী শ্রী জয়দেব ঠাকুরের বাকেরগঞ্জে আগমন । HISCOHER ।",url:"https://youtu.be/WBFZG3OnEoI"},{title:"ধর্মীয় ভিডিও ২",url:"https://youtu.be/3EpHxPLWEEE"},{title:"ধর্মীয় ভিডিও ৩",url:"https://youtu.be/l8gJpdB5qmI"}].concat([["শ্রীমদ্ভগবদ্গীতা পাঠ ও ব্যাখ্যা","গীতা পাঠ বাংলা"],["হরিনাম সংকীর্তন","হরিনাম কীর্তন বাংলা"],["শ্রীমদ্ভাগবত প্রবচন","ভাগবত পাঠ প্রবচন বাংলা"],["রামায়ণ কথা","রামায়ণ কথা বাংলা"],["মহাভারত আলোচনা","মহাভারত আলোচনা বাংলা"],["গায়ত্রী মন্ত্র জপ","গায়ত্রী মন্ত্র"],["দুর্গা আরতি ও স্তোত্র","দুর্গা আরতি বাংলা"]].map(function(a){return{title:a[0],url:"https://www.youtube.com/results?search_query="+encodeURIComponent(a[1])}}));
+function vid(){var VL=S.vl?S.videos:VFB;if(!VL.length)return '<h2>'+t("vid")+'</h2><p class="mu">'+t("novid")+'</p>';
+return '<h2>'+t("vid")+'</h2><div class="grid">'+VL.map(function(v){return '<div class="card"><h3>'+esc(v.title)+'</h3><p><a href="'+esc(v.url)+'" target="_blank" rel="noopener">▶ '+t("watch")+'</a></p></div>'}).join("")+'</div>'}
+function allBooks(){return [SEED_BOOK].concat(S.books)}
+function lib(){var bs=allBooks();
+if(openBook!==null){var b=bs.filter(function(x){return x.id===openBook})[0];if(b){var c=b.chapters[openCh]||{t:"",b:""};
+return '<p><button class="btn" onclick="openBook=null;render()">'+t("back")+'</button></p><h2>'+esc(pick(b.title))+'</h2><p class="mu">'+t("by")+': '+esc(pick(b.author))+'</p><div class="row" style="margin:8px 0">'+b.chapters.map(function(x,i){return '<button class="btn '+(i===openCh?"p":"")+'" onclick="openCh='+i+';render()">'+esc(x.t)+'</button>'}).join("")+'</div><h3>'+esc(c.t)+'</h3><div class="read">'+esc(c.b)+'</div><div class="row" style="margin-top:10px"><button class="btn" '+(openCh<1?"disabled":"")+' onclick="openCh--;render()">‹ '+t("prev")+'</button><button class="btn" '+(openCh>=b.chapters.length-1?"disabled":"")+' onclick="openCh++;render()">'+t("next")+' ›</button></div>'}}
+return '<h2>'+t("lib")+'</h2><div class="grid">'+bs.map(function(b){return '<div class="card click" onclick="openBook=\''+esc(b.id)+'\';openCh=0;render()"><h3>'+esc(pick(b.title))+'</h3><p>'+esc(pick(b.author))+' · '+bn(b.chapters.length)+' '+t("chap")+'</p></div>'}).join("")+'</div>'}
+function man(){return '<h2>'+t("man")+'</h2>'+MANTRAS.map(function(m){return '<div class="card" style="margin:10px 0"><h3>'+pick(m.n)+'</h3><div class="sl">'+esc(m.s)+'</div></div>'}).join("")}
+function adm(){if(!S.canEdit)return '<p class="mu">'+t("login")+'</p>';
+var k=t("kinds");
+var FLD={events:["date","title","kind"],videos:["title","url"],books:["title","author"]};
+var items=function(arr,col,lab){return arr.map(function(x){
+if(S.ed&&S.ed.col===col&&S.ed.id===x.id){return '<div class="card" style="margin:6px 0">'+FLD[col].map(function(f){return '<input id="ef_'+f+'" type="'+(f==="date"?"date":"text")+'" value="'+esc(pick(x[f]))+'" placeholder="'+f+'">'}).join("")+'<button class="btn p" onclick="saveEd()">'+(L==="bn"?"সংরক্ষণ":"Save")+'</button> <button class="btn" onclick="S.ed=null;render()">'+(L==="bn"?"বাতিল":"Cancel")+'</button></div>'}
+return '<div class="row card" style="margin:6px 0"><span>'+esc(lab(x))+'</span><span><button class="btn" onclick="edt(\''+col+'\',\''+esc(x.id)+'\')">'+(L==="bn"?"সম্পাদনা":"Edit")+'</button> <button class="btn" onclick="rm(\''+col+'\',\''+esc(x.id)+'\')">'+t("del")+'</button></span></div>'}).join("")};
+return '<h2>'+t("addEv")+'</h2><div class="card"><input type="date" id="ed"><input id="et" placeholder="'+t("title")+'"><select id="ek">'+k.map(function(x){return '<option>'+x+'</option>'}).join("")+'</select><button class="btn p" onclick="addEv()">'+t("add")+'</button></div>'+items(S.events.slice().sort(function(a,b){return a.date<b.date?-1:1}),"events",function(e){return e.date+" · "+e.title})
++'<h2>'+t("addVid")+'</h2><div class="card"><input id="vt" placeholder="'+t("title")+'"><input id="vu" placeholder="'+t("url")+'"><button class="btn p" onclick="addVid()">'+t("add")+'</button></div>'+items(S.videos,"videos",function(v){return v.title})
++'<h2>'+t("addBk")+'</h2><div class="card"><input id="bt" placeholder="'+t("title")+'"><input id="ba" placeholder="'+t("author")+'"><textarea id="bx" placeholder="'+t("txt")+'"></textarea><button class="btn p" onclick="addBk()">'+t("add")+'</button></div>'+items(S.books,"books",function(b){return pick(b.title)})+'<p id="msg" class="mu"></p>'}
+function msg(s){var m=document.getElementById("msg");if(m)m.textContent=s}
+function v(id){return document.getElementById(id).value.trim()}
+function clr(a){a.forEach(function(i){var e=document.getElementById(i);if(e&&e.tagName!=="SELECT")e.value=""})}
+function save(col,data,f){if(!S.db){msg(t("err"));return}msg(t("saving"));S.db.collection(col).add(data).then(function(){clr(f);msg("✓ "+(L==="bn"?"যোগ হয়েছে":"Added"))},function(e){msg(ec(e))})}
+function ec(e){return t("err")+" ("+((e&&(e.code||e.message))||"")+")"}
+function rm(col,id){if(!S.db){msg(t("err"));return}S.db.collection(col).doc(id).delete().then(function(){msg("✓")},function(e){msg(ec(e))})}
+function edt(col,id){S.ed={col:col,id:id};render()}
+function saveEd(){var e=S.ed;if(!e||!S.db)return;var o={};FLD[e.col].forEach(function(f){o[f]=document.getElementById("ef_"+f).value.trim()});
+S.db.collection(e.col).doc(e.id).update(o).then(function(){S.ed=null;render();msg("✓ "+(L==="bn"?"সংরক্ষিত হয়েছে":"Saved"))},function(x){msg(ec(x))})}
+function addEv(){if(!v("ed")||!v("et"))return;save("events",{date:v("ed"),title:v("et"),kind:v("ek")},["ed","et"])}
+function addVid(){var u=v("vu");if(!v("vt")||!/^https:\/\//.test(u))return;save("videos",{title:v("vt"),url:u.split("?si=")[0]},["vt","vu"])}
+function addBk(){var raw=document.getElementById("bx").value,ch=[],cur=null;
+raw.split("\n").forEach(function(l){if(/^##\s/.test(l)){cur={t:l.replace(/^##\s*/,""),b:""};ch.push(cur)}else{if(!cur){cur={t:"1",b:""};ch.push(cur)}cur.b+=l+"\n"}});
+ch.forEach(function(c){c.b=c.b.trim()});if(!v("bt")||!ch.length)return;
+save("books",{title:v("bt"),author:v("ba"),chapters:ch},["bt","ba","bx"])}
+function render(){document.documentElement.lang=L;document.getElementById("lang").textContent=L==="bn"?"English":"বাংলা";
+document.getElementById("tag").textContent=t("tag");document.getElementById("foot").textContent=t("foot");nav();
+var f={home:home,cal:cal,vid:vid,lib:lib,man:man,adm:adm}[tab()];
+var ids=["ed","et","ek","vt","vu","bt","ba","bx"],sv={},ae=document.activeElement&&document.activeElement.id,mt=(document.getElementById("msg")||{}).textContent||"";
+ids.forEach(function(i){var e=document.getElementById(i);if(e)sv[i]=e.value});
+document.getElementById("app").innerHTML=f();
+ids.forEach(function(i){var e=document.getElementById(i);if(e&&sv[i]!=null)e.value=sv[i]});
+if(ae){var fe=document.getElementById(ae);if(fe&&fe.focus)fe.focus()}
+msg(mt)}
+document.getElementById("lang").onclick=function(){L=L==="bn"?"en":"bn";try{localStorage.setItem("l",L)}catch(e){}render()};
+var TH=null;try{TH=localStorage.getItem("th")}catch(e){}
+function isDark(){return TH?TH==="dark":window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches}
+function applyTh(){if(TH)document.documentElement.setAttribute("data-theme",TH);var b=document.getElementById("theme");b.textContent=isDark()?"☀️":"🌙";b.title=isDark()?(L==="bn"?"লাইট মোড":"Light mode"):(L==="bn"?"ডার্ক মোড":"Dark mode")}
+document.getElementById("theme").onclick=function(){TH=isDark()?"light":"dark";try{localStorage.setItem("th",TH)}catch(e){}applyTh()};
+applyTh();
+window.addEventListener("hashchange",render);
+function sub(col,key){S.db.collection(col).onSnapshot(function(s){S[key]=s.docs.map(function(d){var o=d.data()||{};o.id=d.id;return o});if(key==="videos")S.vl=true;render()},function(){})}
+render();
+if(window.claude&&claude.use){
+claude.use("user").then(function(u){if(u)return u.canEdit().then(function(c){S.canEdit=!!c;render()})}).catch(function(){});
+claude.use("db").then(function(db){if(!db)return;S.db=db;sub("events","events");sub("videos","videos");sub("books","books")}).catch(function(){})}
+</script>
+</body>
+</html>
